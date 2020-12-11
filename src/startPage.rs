@@ -24,7 +24,3 @@ pub fn chooseCharacter(){
     println!("{}7 - Pride", termion::cursor::Goto(1, 9), );
 
 }
-
-pub fn chooseLust(){
- 
-}

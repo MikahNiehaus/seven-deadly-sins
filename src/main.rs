@@ -1,4 +1,4 @@
-use crate::startPage::{startPage, chooseCharacter, chooseLust};
+use crate::startPage::{startPage, chooseCharacter};
 
 use std::io::{stdin, stdout, Write};
 use termion::event::Key;
@@ -7,21 +7,17 @@ use termion::raw::IntoRawMode;
 use crate::characters::{lust,wrath};
 mod characters;
 mod startPage;
-// use std::error::Error;
-// use rusty_audio::Audio;
+
 
 struct State {
-    start:  bool,
+    character:  String,
 } 
-trait Start {
-    fn start(self: &mut Self);
-}
+
+
 
 fn main()  {
- 
-let mut _state = State {
-        start: false,
-    };
+
+ let mut state = "";
 
     let stdin = stdin();
     //setting up stdout and going into raw mode
@@ -48,19 +44,35 @@ let mut _state = State {
         //i reckon this speaks for itself
         match c.unwrap() {
             Key::Char('q') => break,
-            Key::Char('s') => chooseCharacter(),
-            Key::Char('1') => lust(),
+            Key::Char('y') => {yHit(state.to_string());},
+            Key::Char('y') => break,
+            Key::Char('s') => {chooseCharacter()},
+            Key::Char('1') => { keyOne(); state = "CHOSE_LUST";},
             Key::Char('2') => {lust();wrath();},
-            Key::Char('3') => chooseLust(),
-            Key::Char('4') => chooseLust(),
-            Key::Char('5') => wrath(),
-            Key::Char('6') => chooseLust(),
-            Key::Char('7') => chooseLust(),
+            // Key::Char('3') => chooseLust(),
+            // Key::Char('4') => chooseLust(),
+            // Key::Char('5') => wrath(),
+            // Key::Char('6') => chooseLust(),
+            // Key::Char('7') => chooseLust(),
 
             _ => (),
         }
 
         stdout.flush().unwrap();
+    }
+}
+
+fn keyOne(){
+    lust();
+    println!("{}She had a husband who loved her and three kids. Life was perfect until she cheated on her husband and destroyed her family", termion::cursor::Goto(1, 53), );
+    println!("{}Choose this character", termion::cursor::Goto(1, 54), );
+    println!("{}y/n", termion::cursor::Goto(1, 55), );
+    
+}
+
+fn yHit(state: std::string::String) {
+    if state == "CHOSE_LUST"{
+    println!("{}Blubdsfi;oalsdfjas", termion::cursor::Goto(1, 1), );
     }
 }
 
